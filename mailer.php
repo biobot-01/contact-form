@@ -114,7 +114,7 @@
                 $output = json_encode(
                     array(
                         'type' => 'success',
-                        'text' => '<p>Hi '.$name.'</p><p>Thank you for contacting us! We typically reply within 24 hours of receiveing your mail!</p><p>Please keep an eye on those mails.</p>'
+                        'text' => 'Hi '.$name.' Thank you for contacting us! We typically reply within 24 hours of receiveing your mail! Please keep an eye on those mails.'
                     )
                 );
                 die($output);
