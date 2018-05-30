@@ -62,50 +62,50 @@ $(document).ready(function() {
 
             // Add the i element, if doesn't exist,
             // and apply the icon classes to it.
-			if (!element.next("i")[0]) {
-				$('<i class="fas fa-times form-control-feedback"></i>').insertAfter(element);
-			}
-		},
-		success: function(label, element) {
-        	// Add the i element, if doesn't exists,
+            if (!element.next("i")[0]) {
+                $('<i class="fas fa-times form-control-feedback"></i>').insertAfter(element);
+            }
+        },
+        success: function(label, element) {
+            // Add the i element, if doesn't exists,
             // and apply the icon classes to it.
-        	if (!$(element).next("i")[0]) {
-            	$('<i class="fas fa-check form-control-feedback"></i>').insertAfter($(element));
-			}
-		},
-		highlight: function(element, errorClass, validClass) {
-			$(element).parents('fieldset div').addClass("has-error").removeClass("has-success");
-			$(element).next('i').addClass("fa-times").removeClass("fa-check");
-		},
-		unhighlight: function(element, errorClass, validClass) {
-			$(element).parents('fieldset div').addClass("has-success").removeClass("has-error");
-			$(element).next('i').addClass("fa-check").removeClass("fa-times");
-		},
+            if (!$(element).next("i")[0]) {
+                $('<i class="fas fa-check form-control-feedback"></i>').insertAfter($(element));
+            }
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).parents('fieldset div').addClass("has-error").removeClass("has-success");
+            $(element).next('i').addClass("fa-times").removeClass("fa-check");
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('fieldset div').addClass("has-success").removeClass("has-error");
+            $(element).next('i').addClass("fa-check").removeClass("fa-times");
+        },
         submitHandler: function(form) {
             if ($('#contactForm').valid()) {
-			    $.ajax({
-				    type: 'POST',
-				    url: $('#contactForm').attr('action'),
-				    dataType: 'json',
-				    data: $('#contactForm').serialize(),
-				    beforeSend: function() {
+                $.ajax({
+                    type: 'POST',
+                    url: $('#contactForm').attr('action'),
+                    dataType: 'json',
+                    data: $('#contactForm').serialize(),
+                    beforeSend: function() {
                         $('#loading i').addClass("spin");
-					    $('#loading').show();
-				    },
-				    success: function(data) {
-					    $('#formMessages').empty().append(data.text).show();
-				    },
-				    error: function() {
-					    $('#loading').hide();
-					    $("#formMessages span").html("An error occurred when trying to send the form.");
-					    $('#formMessages').show();
-				    },
-				    complete: function() {
+                        $('#loading').show();
+                    },
+                    success: function(data) {
+                        $('#formMessages').empty().append(data.text).show();
+                    },
+                    error: function() {
+                        $('#loading').hide();
+                        $("#formMessages span").html("An error occurred when trying to send the form.");
+                        $('#formMessages').show();
+                    },
+                    complete: function() {
                         $('#loading i').removeClass("spin")
-					    $('#loading').hide();
-				    }
-			    })
-		    }
+                        $('#loading').hide();
+                    }
+                })
+            }
         }
-	});
+    });
 });
