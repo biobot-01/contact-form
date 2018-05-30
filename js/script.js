@@ -52,10 +52,10 @@ $(document).ready(function() {
             error.addClass("help-block");
             // Add `has-feedback` class to the parent fieldset.div
             // in order to add icons to inputs
-            element.parents("fieldset div").addClass("has-feedback");
+            element.parents('fieldset div').addClass("has-feedback");
 
             if (element.prop("type") === "checkbox") {
-                error.insertAfter(element.parent("label"));
+                error.insertAfter(element.parent('label'));
             } else {
                 error.insertAfter(element);
             }
@@ -97,14 +97,15 @@ $(document).ready(function() {
                     },
                     error: function() {
                         $('#loading').hide();
-                        $("#formMessages span").html("An error occurred when trying to send the form.");
+                        $('#formMessages span').html("An error occurred when trying to send the form.");
                         $('#formMessages').show();
                     },
                     complete: function() {
                         $('#loading i').removeClass("spin")
                         $('#loading').hide();
                     }
-                })
+                });
+                return false;
             }
         }
     });
