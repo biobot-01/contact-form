@@ -1,58 +1,58 @@
 $(document).ready(function() {
     // Contact form validation
-	// Initialize form validation on contact form
-	$('#contactForm').validate({
-		// Specify validation rules
-		rules: {
-			fullName: {
-				required: true,
-				minlength: 4
-			},
-			contactEmail: {
-				required: true,
-				email: true
-			},
-			phoneNumber: {
-				phonesUK: true
-			},
-			subject: {
-				required: true,
-				minlength: 4
-			},
-			contactMessage: {
-				required: true,
-				minlength: 5
-			}
-		},
-		// Validation error messages to display for each rule
-		messages: {
-			fullName: {
-				required: "Please enter your full name",
-				minlength: "Your name must consist of at least 4 characters"
-			},
-			contactEmail: {
+    // Initialize form validation on contact form
+    $('#contactForm').validate({
+        // Specify validation rules
+        rules: {
+            fullName: {
+                required: true,
+                minlength: 4
+            },
+            contactEmail: {
+                required: true,
+                email: true
+            },
+            phoneNumber: {
+                phonesUK: true
+            },
+            subject: {
+                required: true,
+                minlength: 4
+            },
+            contactMessage: {
+                required: true,
+                minlength: 5
+            }
+        },
+        // Validation error messages to display for each rule
+        messages: {
+            fullName: {
+                required: "Please enter your full name",
+                minlength: "Your name must consist of at least 4 characters"
+            },
+            contactEmail: {
                 required: "Please enter a valid email address",
                 email: "Your email address must be in the format of your@email.com"
             },
-			phoneNumber: {
-				phonesUK: "Please enter a valid UK landline or mobile number"
-			},
-			subject: {
-				required: "Please enter the nature of your enquiry",
-				minlength: "The subject must consist of at least 4 characters"
-			},
-			contactMessage: {
-				required: "We need to know what you want. Tell us here",
-				minlength: "Message is too short. Please provide as much detail as possible"
-			}
-		},
-		errorElement: "em",
-		errorPlacement: function(error, element) {
+            phoneNumber: {
+                phonesUK: "Please enter a valid UK landline or mobile number"
+            },
+            subject: {
+                required: "Please enter the nature of your enquiry",
+                minlength: "The subject must consist of at least 4 characters"
+            },
+            contactMessage: {
+                required: "We need to know what you want. Tell us here",
+                minlength: "Message is too short. Please provide as much detail as possible"
+            }
+        },
+        errorElement: "em",
+        errorPlacement: function(error, element) {
             // Add the `help-block` class to the error element
-			error.addClass("help-block");
+            error.addClass("help-block");
             // Add `has-feedback` class to the parent fieldset.div
             // in order to add icons to inputs
-			element.parents("fieldset div").addClass("has-feedback");
+            element.parents("fieldset div").addClass("has-feedback");
 
             if (element.prop("type") === "checkbox") {
                 error.insertAfter(element.parent("label"));
