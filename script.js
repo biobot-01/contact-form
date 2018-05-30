@@ -8,7 +8,7 @@ $(document).ready(function() {
 				required: true,
 				minlength: 4
 			},
-			email: {
+			contactEmail: {
 				required: true,
 				email: true
 			},
@@ -19,7 +19,7 @@ $(document).ready(function() {
 				required: true,
 				minlength: 4
 			},
-			message: {
+			contactMessage: {
 				required: true,
 				minlength: 5
 			}
@@ -28,72 +28,84 @@ $(document).ready(function() {
 		messages: {
 			fullName: {
 				required: "Please enter your full name",
-				minlength: $.validator.format("At least {0} characters required!")
+				minlength: "Your name must consist of at least 4 characters"
 			},
-			email: {
-				required: "We need your email address to contact you",
-				email: "Your email address must be in the format of name@domain.com"
-			},
+			contactEmail: {
+                required: "Please enter a valid email address",
+                email: "Your email address must be in the format of your@email.com"
+            },
 			phoneNumber: {
 				phonesUK: "Please enter a valid UK landline or mobile number"
 			},
 			subject: {
 				required: "Please enter the nature of your enquiry",
-				minlength: $.validator.format("At least {0} characters required!")
+				minlength: "The subject must consist of at least 4 characters"
 			},
-			message: {
+			contactMessage: {
 				required: "We need to know what you want. Tell us here",
 				minlength: "Message is too short. Please provide as much detail as possible"
 			}
 		},
 		errorElement: "em",
 		errorPlacement: function(error, element) {
-			error.addClass("panel red");
-			element.parents("fieldset").addClass("red");
-			
-			if (!element.next("span")[0]) {
-				$("<span class='fa fa-close form-control-feedback'></span>").insertAfter(element);
+            // Add the `help-block` class to the error element
+			error.addClass("help-block");
+            // Add `has-feedback` class to the parent fieldset.div
+            // in order to add icons to inputs
+			element.parents("fieldset div").addClass("has-feedback");
+
+            if (element.prop("type") === "checkbox") {
+                error.insertAfter(element.parent("label"));
+            } else {
+                error.insertAfter(element);
+            }
+
+            // Add the i element, if doesn't exist,
+            // and apply the icon classes to it.
+			if (!element.next("i")[0]) {
+				$('<i class="fas fa-times form-control-feedback"></i>').insertAfter(element);
 			}
 		},
 		success: function(label, element) {
-        	// Add the span element, if doesn't exists, and apply the icon classes to it.
-        	if (!$(element).next("span")[0]) {
-            	$("<span class='fa fa-check form-control-feedback'></span>").insertAfter($(element));
+        	// Add the i element, if doesn't exists,
+            // and apply the icon classes to it.
+        	if (!$(element).next("i")[0]) {
+            	$('<i class="fas fa-check form-control-feedback"></i>').insertAfter($(element));
 			}
 		},
 		highlight: function(element, errorClass, validClass) {
-			$(element).parents("fieldset").addClass("red").removeClass("green");
-			$(element).next("span").addClass("fa-close").removeClass("fa-check");
+			$(element).parents('fieldset div').addClass("has-error").removeClass("has-success");
+			$(element).next('i').addClass("fa-times").removeClass("fa-check");
 		},
 		unhighlight: function(element, errorClass, validClass) {
-			$(element).parents("fieldset").addClass("green").removeClass("red");
-			$(element).next("span").addClass("fa-check").removeClass("fa-close");
-		}
-	});
-	
-	$('#contactForm').on('submit', function(e) {
-		e.preventDefault();
-		if ($('#contactForm').valid()) {
-			$.ajax({
-				type: 'POST',
-				url: $('#contactForm').attr('action'),
-				dataType: 'json',
-				data: $('#contactForm').serialize(),
-				beforeSend: function() {
-					$('#loading').show();
-				},
-				success: function(data) {
-					$("#formMessages").empty().append(data.text).show();
-				},
-				error: function() {
-					$('#loading').hide();
-					$("#formMessages span").html("An error occurred when trying to send the form.");
-					$('#formMessages').show();
-				},
-				complete: function() {
-					$('#loading').hide();
-				}
-			})
-		}
+			$(element).parents('fieldset div').addClass("has-success").removeClass("has-error");
+			$(element).next('i').addClass("fa-check").removeClass("fa-times");
+		},
+        submitHandler: function(form) {
+            if ($('#contactForm').valid()) {
+			    $.ajax({
+				    type: 'POST',
+				    url: $('#contactForm').attr('action'),
+				    dataType: 'json',
+				    data: $('#contactForm').serialize(),
+				    beforeSend: function() {
+                        $('#loading i').addClass("spin");
+					    $('#loading').show();
+				    },
+				    success: function(data) {
+					    $('#formMessages').empty().append(data.text).show();
+				    },
+				    error: function() {
+					    $('#loading').hide();
+					    $("#formMessages span").html("An error occurred when trying to send the form.");
+					    $('#formMessages').show();
+				    },
+				    complete: function() {
+                        $('#loading i').removeClass("spin")
+					    $('#loading').hide();
+				    }
+			    })
+		    }
+        }
 	});
 });

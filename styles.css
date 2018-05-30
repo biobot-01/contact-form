@@ -1,0 +1,133 @@
+*,
+*:after,
+*:before {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+  -webkit-font-smoothing:antialiased;
+  -moz-font-smoothing:antialiased;
+  font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+html,
+body {
+  font-family:Verdana, sans-serif;
+  font-size:15px;
+  line-height:1.5;
+}
+html {
+  box-sizing:border-box;
+  font-size:80%;
+  overflow-x:hidden;
+}
+body {
+  margin:0;
+  font:300 16px/1.4 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color:#000;
+  background-color:#d3d3d3;
+}
+section {
+  max-width:400px;
+  width:100%;
+  margin:10px auto;
+  padding:16px 16px;
+  position:relative;
+  background-color:#f9f9f9;
+}
+form {
+  display:block;
+  font-size:15px;
+  margin:0 auto;
+}
+fieldset {
+  border:0;
+  margin:0;
+  padding:6px 8px 10px;
+}
+label {
+  padding:8px 0;
+}
+button,
+input,
+select,
+textarea {
+  font-family:inherit;
+  font-size:100%;
+  margin:0;
+}
+input,
+textarea {
+  padding:6px;
+}
+input:focus,
+textarea:focus {
+  outline:0;
+  border:1px solid #2196f3;
+}
+textarea {
+  overflow:auto;
+  vertical-align:top;
+}
+.input {
+  display:block;
+  width:100%;
+  margin-top:8px;
+}
+.hide {
+  display:none;
+}
+.has-feedback {
+  position:relative;
+}
+.has-feedback .input {
+  padding-right:34px;
+}
+.form-control-feedback {
+  display:block;
+  position:absolute;
+  top:0;
+  right:0;
+  z-index:2;
+  width:34px;
+  height:34px;
+  line-height:34px;
+  text-align:center;
+  pointer-events:none;
+}
+.has-error .form-control-feedback {
+  color:#f44336;
+}
+.has-success .form-control-feedback {
+  color:#4caf50;
+}
+.help-block {
+  display:block;
+  margin:5px 0;
+}
+.has-error .help-block {
+  color:#f44336;
+}
+.has-success .help-block {
+  color:#4caf50;
+}
+#formMessages {
+  display:none;
+  padding:8px 16px;
+}
+.spinner {
+  display:none;
+  position:relative;
+  top:0;
+  left:8px;
+}
+.spin {
+  animation:spin 2s infinite linear;
+}
+@keyframes spin {
+  0% {
+    transform:rotate(0deg);
+  }
+  100% {
+    transform:rotate(359deg);
+  }
+}
